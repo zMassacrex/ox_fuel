@@ -1,4 +1,4 @@
-# ox_fuel
+# ox_fuel with NPC
 
 Basic fuel resource and alternative to LegacyFuel, meant for use with ox_inventory.
 
