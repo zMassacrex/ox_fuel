@@ -74,7 +74,7 @@ end)
 if config.ox_target then return require 'client.target' end
 
 RegisterCommand('startfueling', function()
-	if state.isFueling or cache.vehicle or lib.progressActive() then return end
+	if state.isFueling or lib.progressActive() then return end
 
 	local petrolCan = config.petrolCan.enabled and GetSelectedPedWeapon(cache.ped) == `WEAPON_PETROLCAN`
 	local playerCoords = GetEntityCoords(cache.ped)
@@ -98,7 +98,7 @@ RegisterCommand('startfueling', function()
 
 			return lib.notify({ type = 'error', description = locale('petrolcan_cannot_afford') })
 		elseif moneyAmount >= config.priceTick then
-			return fuel.startFueling(state.lastVehicle, true)
+			return fuel.startFueling(state.lastVehicle, true, nearestPump)
 		else
 			return lib.notify({ type = 'error', description = locale('refuel_cannot_afford') })
 		end
@@ -113,7 +113,7 @@ RegisterCommand('startfueling', function()
 			local fuelcapPosition = boneIndex and GetWorldPositionOfEntityBone(vehicle, boneIndex)
 
 			if fuelcapPosition and #(playerCoords - fuelcapPosition) < 1.8 then
-				return fuel.startFueling(vehicle, false)
+				return fuel.startFueling(vehicle, false, nearestPump)
 			end
 
 			return lib.notify({ type = 'error', description = locale('vehicle_far') })

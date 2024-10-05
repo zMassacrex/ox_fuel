@@ -15,6 +15,16 @@ function utils.createBlip(coords)
 	return blip
 end
 
+function LoadAnimDict(dict)
+	if not HasAnimDictLoaded(dict) then
+		RequestAnimDict(dict)
+
+		while not HasAnimDictLoaded(dict) do
+			Wait(1)
+		end
+	end
+end
+
 function utils.getVehicleInFront()
 	local coords = GetEntityCoords(cache.ped)
 	local destination = GetOffsetFromEntityInWorldCoords(cache.ped, 0.0, 2.2, -0.25)
