@@ -188,6 +188,8 @@ function fuel.startFueling(vehicle, isPump, nearestPump)
 	ClearPedTasks(cache.ped)
 
 	if isPump then
+		SetVehicleFuelLevel(vehicle, fuelAmount + 0.0)
+		DecorSetFloat(vehicle, "_FUEL_LEVEL", GetVehicleFuelLevel(vehicle))
 		TriggerServerEvent('ox_fuel:pay', price, fuelAmount, NetworkGetNetworkIdFromEntity(vehicle))
 	else
 		TriggerServerEvent('ox_fuel:updateFuelCan', durability, NetworkGetNetworkIdFromEntity(vehicle), fuelAmount)
